@@ -16,3 +16,17 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @import "welcome";
+
+
+  .social-btn {
+     position: relative;
+     top: 25px;
+     left: 46%;
+     width: 200px;
+     height: 50px;
+     background: red;
+     border-radius: 25px;
+     padding: 10px;
+     color: white;
+  }
