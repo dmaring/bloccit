@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
 
-  get 'welcome/about'
+  # Creates all CRUD routes for resource posts
+  resources :posts
+
+  # Allows users to visit /about rather than /welcome/about
+  get 'about' => 'welcome#about'
 
   root 'welcome#index'
 
