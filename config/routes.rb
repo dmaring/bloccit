@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  # Creates all CRUD routes for resource advertisements
+  resources(:advertisements)
+
   # Creates all CRUD routes for resource posts
   resources :posts
 
