@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  # Creates all CRUD routes for resource posts
+
+  # Creates all CRUD routes for resource posts and questions
   resources :posts
+  resources :questions
 
   # Allows users to visit /about rather than /welcome/about
   get 'about' => 'welcome#about'
