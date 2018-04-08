@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
-  # Creates all CRUD routes for resource posts
-  resources :posts
+# we pass resources :posts to the resources :topics block. This nests the post routes under the topic routes.
+  resources :topics do
+    resources :posts, except: [:index]
+  end
+
 
   # Allows users to visit /about rather than /welcome/about
   get 'about' => 'welcome#about'
