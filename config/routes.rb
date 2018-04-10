@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 # we pass resources :posts to the resources :topics block. This nests the post routes under the topic routes.
   resources :topics do
+    # creates all routes for :posts except for the index route
     resources :posts, except: [:index]
   end
 
