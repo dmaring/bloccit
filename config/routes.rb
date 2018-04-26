@@ -7,10 +7,12 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:new, :create]
+  post 'users/confirm', to: 'users#confirm'
+
 
 
   # Allows users to visit /about rather than /welcome/about
-  get 'about' => 'welcome#about'
+  get('about', to: 'welcome#about')
 
   root 'welcome#index'
 
