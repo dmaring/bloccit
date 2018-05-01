@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create]
 
+  resources :sessions, only: [:new, :create, :destroy]
+
 
   # Allows users to visit /about rather than /welcome/about
   get 'about' => 'welcome#about'

@@ -19,7 +19,14 @@
                   <li class="nav-item">
                     <%= link_to "About", about_path, class: 'nav-link' %>
                   </li>
-                  <li class="nav-item"><%= link_to "Sign Up", new_user_path, class: 'nav-link' %><li>
+                  <% if current_user %>
+                    <li class="nav-item">
+                      <%= link_to "#{current_user.name} -Sign Out", session_path(current_user), method: :delete, class: 'nav-link' %>
+                    </li>
+                  <% else %>
+                    <li class="nav-item"><%= link_to "Sign In", new_session_path, class: 'nav-link' %></li>
+                    <li class="nav-item"><%= link_to "Sign Up", new_user_path, class: 'nav-link' %></li>
+                  <% end %>
               </ul>
 
               <% if flash[:notice] %>
