@@ -22,4 +22,5 @@ class SessionsController < ApplicationController
     flash[:notice] = "You've been signed out, come back soon!"
     redirect_to root_path
   end
+
 end
