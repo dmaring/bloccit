@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+  # the before_action filter calls require_sign_in before each
+  # controller action except for :show
+  before_action :require_sign_in, except: :show
 
   def show
     @post = Post.find(params[:id])
@@ -10,11 +13,15 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
+    # @post = Post.new
+    # @post.title = params[:post][:title]
+    # @post.body = params[:post][:body]
     @topic = Topic.find(params[:topic_id])
-    @post.topic = @topic
+    # @post.topic = @topic
+    # above @post parameters mass assigned below
+    # post_params is a private method def at bottom
+    @post = @topic.posts.build(post_params)
+    @post.user = current_user
 
     if @post.save
       flash[:notice] = "Post was saved."
@@ -31,8 +38,9 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
+    # @post.title = params[:post][:title]
+    # @post.body = params[:post][:body]
+    @post.assign_attributes(post_params)
 
     if @post.save
       flash[:notice] = "Post was updated."
@@ -53,5 +61,11 @@ class PostsController < ApplicationController
       flash.now[:alert] = "There was an error deleting the post."
       render(:show)
     end
+  end
+
+  # private methods go below this line
+  private
+  def post_params
+    params.require(:post).permit(:title, :body)
   end
 end

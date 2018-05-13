@@ -26,4 +26,15 @@ module RandomData
     # Grab index 0 to 3..8 from array
     letters[0,rand(3..8)].join
   end
+
+  def self.random_name
+    first_name = random_word.capitalize
+    last_name = random_word.capitalize
+    "#{first_name} #{last_name}"
+  end
+
+  def self.random_email
+    "#{random_word}@#{random_word}.#{random_word}"
+  end
+  
 end
