@@ -5,15 +5,20 @@ class Post < ApplicationRecord
 
   default_scope { order('created_at DESC') }
 
-  def self.ordered_by_title
-    order('title DESC')
-  end
-  # the above could also be written
-  # scope :published, -> { where(published: true) }
+  scope :order_by_title, -> { order('title ASC') }
 
-  def self.ordered_by_reverse_created_at
-    order('created_at ASC')
-  end
+  # # the above could also be written
+  # def self.ordered_by_title
+  #   order('title DESC')
+  # end
+
+
+  scope :order_by_reverse_created_at, -> { order('created_at ASC') }
+
+  # the above could also be written
+  # def self.ordered_by_reverse_created_at
+  #   order('created_at ASC')
+  # end
 
 
   validates :title, length: { minimum: 5 }, presence: true
