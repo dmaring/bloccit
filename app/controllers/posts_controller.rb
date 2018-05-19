@@ -3,6 +3,8 @@ class PostsController < ApplicationController
   # controller action except for :show
   before_action :require_sign_in, except: :show
 
+  before_action :authorize_user, except: [:show, :new, :create]
+
   def show
     @post = Post.find(params[:id])
   end
@@ -67,5 +69,14 @@ class PostsController < ApplicationController
   private
   def post_params
     params.require(:post).permit(:title, :body)
+  end
+
+  def authorize_user
+    post = Post.find(params[:id])
+    # We redirect the user unless they own the post they're attempting to modify, or they're an admin
+    unless current_user == post.user || current_user.admin?
+      flash[:alert] = "You must be an admin to do that."
+      redirect_to [post.topic, post]
+    end
   end
 end
