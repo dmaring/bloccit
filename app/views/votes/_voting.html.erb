@@ -1,0 +1,7 @@
+<% if current_user %>
+  <div class="">
+    <div><%= link_to "^", post_up_vote_path(post), class: 'octicon triangle-up', method: :post %>
+    <div><strong><%= post.points %></strong></div>
+    <div><%= link_to "v", post_down_vote_path(post), class: 'glyphicon glyphicon-menu-down', method: :post %></div>
+  </div>
+<% end %>

@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :votes, dependent: :destroy
+
   before_save { self.email = email.downcase if email.present? }
   # ||= is a Ruby trick. The code self.role ||= :member, then, is shorthand for
   # self.role = :member if self.role.nil?.
