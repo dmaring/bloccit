@@ -29,6 +29,9 @@
           </small>
         </div>
       </h3>
+      <% if current_user %>
+        <%= render partial: 'favorites/favorite', locals: { post: @post } %>
+      <% end %>
     </div>
   <div class="col-md-8">
     <h3>Comments</h3>

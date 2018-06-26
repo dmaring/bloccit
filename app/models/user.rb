@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   before_save { self.email = email.downcase if email.present? }
   # ||= is a Ruby trick. The code self.role ||= :member, then, is shorthand for
@@ -21,4 +22,9 @@ class User < ApplicationRecord
   has_secure_password
 
   enum role: [:member, :admin]
+
+  def favorite_for(post)
+    # calling .first on an array will return either the first favorite or nil if there is no array
+    favorites.where(post_id: post.id).first
+  end
 end
