@@ -20,9 +20,11 @@
                     <%= link_to "About", about_path, class: 'nav-link' %>
                   </li>
                   <% if current_user %>
-                    <li class="nav-item">
-                      <%= link_to "#{current_user.name} - Sign Out", session_path(current_user), method: :delete, class: 'nav-link float-right' %>
-                    </li>
+
+                    <li class="float-right gravatar"><%= image_tag current_user.avatar_url(48) %></li>
+                    <li class="float-right"><%= link_to current_user.name, user_path(current_user) %></li>
+                    <li class="nav-item nav-link float-right"><%= link_to "Sign Out", session_path(current_user), method: :delete %>
+
                   <% else %>
                     <li class="nav-item"><%= link_to "Sign In", new_session_path, class: 'nav-link float-right' %></li>
                     <li class="nav-item"><%= link_to "Sign Up ", new_user_path, class: 'nav-link float-right' %></li>

@@ -8,6 +8,8 @@ class Post < ApplicationRecord
 
   default_scope { order('rank DESC') }
 
+  scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
+
   scope :order_by_title, -> { order('title ASC') }
 
   # # the above could also be written
