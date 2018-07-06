@@ -41,6 +41,7 @@ RSpec.describe Post, type: :model do
       2.times { post.votes.create!(value: -1, user: user) }
       @up_votes = post.votes.where(value: 1).count
       @down_votes = post.votes.where(value: -1).count
+      @all_votes = post.votes.count
     end
 
     describe "#up_votes" do
@@ -78,6 +79,11 @@ RSpec.describe Post, type: :model do
         post.votes.create!(value: -1, user: user)
         expect(post.rank).to eq(old_rank - 1)
       end
+    end
+
+  describe "#total_votes"
+    it "counts the total number of votes" do
+      expect(@up_votes + @down_votes).to eq (@all_votes)
     end
   end
 end

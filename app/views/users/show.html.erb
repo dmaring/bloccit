@@ -18,9 +18,32 @@
     </div>
   </div>
 </div>
-
-<h2>Posts</h2>
-<%= render @user.posts %>
-
-<h2>Comments</h2>
-<%= render @user.comments %>
+<div class="row">
+  <div class="col-md-12">
+    <% if user_has_comments_or_posts?(@user) %>
+      <h2>Posts</h2>
+        <%= render @user.posts %>
+  </div>
+  <div class="col-md-12">
+      <h2>Comments</h2>
+        <%= render @user.comments %>
+  </div>
+  <% else %>
+      <h2><%= "#{@user.name} has not submitted any posts yet." %></h2>
+    <% end %>
+  </div>
+  <div class="col-md-12">
+    <h2>Favorited Posts</h2>
+    <% @user.favorites.each do |f| %>
+      <% favorited_post = Post.find(f.post_id) %>
+      <% author = User.find(favorited_post.user_id) %>
+      <p>
+      Title:  <%= favorited_post.title %><br/>
+      Author:  <%= author.name %><br/>
+      <%= image_tag author.avatar_url(48) %><br/>
+      Comments:  <%= favorited_post.total_comments %><br/>
+      Votes:  <%= favorited_post.total_votes %><br/><br/>
+    </p>
+    <% end %>
+    </div>
+</div>
